@@ -1,0 +1,29 @@
+body {
+  background-color: rgb(244, 240, 235);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a {
+  text-decoration: none;
+  color: #898686;
+}
+
+a:hover {
+  color: rgb(99, 97, 97);
+}
+
+.grayscale {
+  filter: invert(53%) sepia(6%) saturate(142%) hue-rotate(332deg) brightness(99%) contrast(98%);
+}
+.tooltip-arrow {
+  display: none !important;
+}
