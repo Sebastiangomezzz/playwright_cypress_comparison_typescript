@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { ProductDetailPage } from '../../pages';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';

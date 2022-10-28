@@ -36,6 +36,6 @@ export const useWindowResize = () => {
     } else {
       setBreakPoint('xxl');
     }
-  }, [windowSize.innerWidth]);
+  }, [windowSize.innerWidth, windowSize]);
   return { breakPoint };
 };

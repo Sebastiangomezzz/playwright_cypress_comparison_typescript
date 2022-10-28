@@ -8,7 +8,7 @@ export const SearchBar = ({ products, setFilteredData }) => {
 
   useEffect(() => {
     setFilteredData(products);
-  }, []);
+  }, [products, setFilteredData]);
 
   const handleChange = ({ target }) => {
     if (target.value.length <= 2) {
@@ -24,7 +24,7 @@ export const SearchBar = ({ products, setFilteredData }) => {
       );
       setFilteredData(filteredResults);
     }
-  }, [valueToSearch]);
+  }, [valueToSearch, products, setFilteredData]);
   return (
     <Container className='d-flex flex-row-reverse'>
       <Card style={{ width: '15rem', marginRight: '0.6rem', marginBottom: '1.2rem' }}>

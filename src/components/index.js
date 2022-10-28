@@ -3,7 +3,7 @@ export * from './common/Error';
 export * from './common/Image';
 export * from './common/NavbarWithCart';
 export * from './common/Breadcrumbs';
-export * from './common/ShoppingCart';
+export * from './common/ShoppingCart/ShoppingCart';
 export * from './common/SearchBar';
 export * from './common/Toasts';
 

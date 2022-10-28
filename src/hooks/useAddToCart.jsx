@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAddProductMutation } from '../store/api/productsApi';
 import { useDispatch } from 'react-redux';
-import { increment } from '../store/Slices/cartSlice';
+import { increment, addProductToCart } from '../store/Slices/cartSlice';
 
 export const useAddToCart = ({ id, colors, memoryOptions }) => {
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ export const useAddToCart = ({ id, colors, memoryOptions }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(addProductToCart(formState));
     await addProduct(formState);
   };
   useEffect(() => {
