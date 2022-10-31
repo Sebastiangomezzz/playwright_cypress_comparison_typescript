@@ -30,7 +30,7 @@ export const ShoppingCart = () => {
   return (
     <div ref={ref}>
       <Container
-        className='d-flex align-items-end flex-column'
+        className='d-flex align-items-end flex-column cart-btn'
         onClick={handleClick}>
         <Badge
           pill
@@ -59,7 +59,7 @@ export const ShoppingCart = () => {
           id='popover-contained'
           style={{ padding: 0, backgroundColor: 'rgba(185, 182, 182, 0.5)' }}>
           <Popover.Header as='h3'>Cart</Popover.Header>
-          <Popover.Body>
+          <Popover.Body className='cart-list'>
             {productsInCart && productsInCart.length > 0 ? (
               productsInCart.map((product) => (
                 <ShoppingCartOverlayItem

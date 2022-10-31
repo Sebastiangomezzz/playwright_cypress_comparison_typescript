@@ -29,7 +29,8 @@ export const ProductDetailPage = () => {
           <Container className='d-flex justify-content-end pe-4'>
             <Button
               variant='secondary'
-              onClick={() => back()}>
+              onClick={() => back()}
+              className='back-to-list-btn'>
               Back to List of devices
             </Button>
           </Container>

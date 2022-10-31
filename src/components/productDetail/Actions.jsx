@@ -45,7 +45,8 @@ export const Actions = ({ toggleShowToast, id, colors, memoryOptions }) => {
         </Form.Select>
         <Button
           type='submit'
-          onClick={toggleShowToast}>
+          onClick={toggleShowToast}
+          className='button-add-to-cart'>
           Add to cart
         </Button>
       </Form>

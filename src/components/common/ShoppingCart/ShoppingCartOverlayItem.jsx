@@ -62,10 +62,19 @@ export const ShoppingCartOverlayItem = ({ productId, variant, handleDeleteProduc
           justifyContent: 'flex-end'
         }}>
         <span style={{ marginRight: '2rem' }}>
-          <Button onClick={() => setCurrentQuantity(currentQuantity + 1)}>+</Button>{' '}
-          <Button onClick={() => setCurrentQuantity(currentQuantity - 1)}>-</Button>
+          <Button
+            className='btn-add-one'
+            onClick={() => setCurrentQuantity(currentQuantity + 1)}>
+            +
+          </Button>{' '}
+          <Button
+            className='btn-substract-one'
+            onClick={() => setCurrentQuantity(currentQuantity - 1)}>
+            -
+          </Button>
         </span>
         <Button
+          className='btn-remove-from-cart'
           onClick={() => handleDeleteProduct(productId, variant)}
           variant='danger'>
           X
