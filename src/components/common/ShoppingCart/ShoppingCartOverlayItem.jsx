@@ -8,7 +8,7 @@ export const ShoppingCartOverlayItem = ({ productId, variant, handleDeleteProduc
   const { data: products } = useGetProductsQuery();
 
   useEffect(() => {
-    const currentProduct = products?.find((p) => p.id === productId);
+    const currentProduct = products?.find((product) => product.id === productId);
     setCurrentProduct({ ...currentProduct, ...variant });
     setCurrentQuantity(variant.quantity);
   }, [products, productId, variant]);
@@ -24,24 +24,25 @@ export const ShoppingCartOverlayItem = ({ productId, variant, handleDeleteProduc
       }}>
       <span
         style={{
-          height: '3.5rem',
+          height: 'auto',
           width: '15rem',
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
-          padding: '0.5rem',
+          alignItems: 'center',
+          padding: '0.3rem',
           borderRadius: '0.5rem',
           backgroundColor: 'white',
           marginBottom: '0.5rem'
         }}>
         <img
-          style={{ height: '2rem', width: 'auto' }}
+          style={{ height: '2.5rem', width: 'auto', borderRadius: '0.1rem' }}
           src={currentProduct?.imgUrl}
           alt={currentProduct?.model}
         />
         <span
           style={{
-            width: '10rem',
+            width: '15rem',
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-around'
