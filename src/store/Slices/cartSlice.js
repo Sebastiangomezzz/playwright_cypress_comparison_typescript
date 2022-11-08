@@ -12,6 +12,42 @@ export const cartSlice = createSlice({
     increment: (state) => {
       state.value += 1;
     },
+    incrementProductQuantity: (state, payload) => {
+      const { id, colorCode, storageCode } = payload.payload;
+      const product = state.productsInCart.find(
+        (product) =>
+          product.id === id &&
+          product.colorCode === colorCode &&
+          product.storageCode === storageCode
+      );
+      if (product) {
+        product.quantity += 1;
+        state.value += 1;
+      }
+    },
+    decrementProductQuantity: (state, payload) => {
+      const { id, colorCode, storageCode, quantity } = payload.payload;
+      if (quantity === 1) {
+        state.value -= 1;
+        state.productsInCart = state.productsInCart.filter(
+          (product) =>
+            product.id !== id ||
+            product.colorCode !== colorCode ||
+            product.storageCode !== storageCode
+        );
+      } else {
+        const product = state.productsInCart.find(
+          (product) =>
+            product.id === id &&
+            product.colorCode === colorCode &&
+            product.storageCode === storageCode
+        );
+        if (product) {
+          product.quantity -= 1;
+          state.value -= 1;
+        }
+      }
+    },
     addProductToCart: (state, payload) => {
       // if the product does not exist in the cart, add it
       if (
@@ -53,9 +89,8 @@ export const cartSlice = createSlice({
       //delete one product with the same color and memory and decrement the quantity by one
       console.log(payload.payload.variant);
       const productToDelete = payload.payload.variant;
+      state.value = state.value - productToDelete.quantity;
       state.productsInCart.forEach((product) => {
-        console.log(product.quantity);
-        state.value = state.value - product.quantity;
         state.productsInCart = state.productsInCart.filter(
           (product) =>
             product.id !== productToDelete.id ||
@@ -66,5 +101,11 @@ export const cartSlice = createSlice({
     }
   }
 });
-export const { increment, addProductToCart, deleteProductFromCart } = cartSlice.actions;
+export const {
+  increment,
+  incrementProductQuantity,
+  decrementProductQuantity,
+  addProductToCart,
+  deleteProductFromCart
+} = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ProductListPage, ProductDetailPage } from './pages';
+import { ProductListPage, ProductDetailPage, CheckoutPage, ErrorPage } from './pages';
 import { GlobalLayout } from './layout/GlobalLayout';
 import { store } from './store/store';
 import { Provider } from 'react-redux';
@@ -31,6 +31,14 @@ root.render(
               <Route
                 path='products/:productId'
                 element={<ProductDetailPage />}
+              />
+              <Route
+                path='checkout'
+                element={<CheckoutPage />}
+              />
+              <Route
+                path='*'
+                element={<ErrorPage />}
               />
             </Routes>
           </GlobalLayout>

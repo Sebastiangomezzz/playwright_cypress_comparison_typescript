@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useGetProductsQuery } from '../../../store/api/productsApi';
+import { useDispatch } from 'react-redux';
+import {
+  incrementProductQuantity,
+  decrementProductQuantity
+} from '../../../store/Slices/cartSlice';
 
 export const ShoppingCartOverlayItem = ({ productId, variant, handleDeleteProduct }) => {
   const [currentProduct, setCurrentProduct] = useState(null);
   const [currentQuantity, setCurrentQuantity] = useState(0);
   const { data: products } = useGetProductsQuery();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const currentProduct = products?.find((product) => product.id === productId);
@@ -63,18 +69,24 @@ export const ShoppingCartOverlayItem = ({ productId, variant, handleDeleteProduc
         }}>
         <span style={{ marginRight: '2rem' }}>
           <Button
-            className='btn-add-one'
-            onClick={() => setCurrentQuantity(currentQuantity + 1)}>
+            cy-data='btn-add-one'
+            onClick={() => {
+              setCurrentQuantity(currentQuantity + 1);
+              dispatch(incrementProductQuantity(currentProduct));
+            }}>
             +
           </Button>{' '}
           <Button
-            className='btn-substract-one'
-            onClick={() => setCurrentQuantity(currentQuantity - 1)}>
+            data-cy='btn-substract-one'
+            onClick={() => {
+              setCurrentQuantity(currentQuantity - 1);
+              dispatch(decrementProductQuantity(currentProduct));
+            }}>
             -
           </Button>
         </span>
         <Button
-          className='btn-remove-from-cart'
+          cy-data='btn-remove-from-cart'
           onClick={() => handleDeleteProduct(productId, variant)}
           variant='danger'>
           X

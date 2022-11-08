@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Image, Loading, Error, Description, Actions, Toasts } from '../components';
+import { Image, Loading, Description, Actions, Toasts } from '../components';
 import { useGetProductQuery } from '../store/api/productsApi';
 
 export const ProductDetailPage = () => {
@@ -23,14 +23,14 @@ export const ProductDetailPage = () => {
       {isLoading ? (
         <Loading />
       ) : isError ? (
-        <Error />
+        navigate('/error')
       ) : isSuccess ? (
         <Container>
           <Container className='d-flex justify-content-end pe-4'>
             <Button
               variant='secondary'
               onClick={() => back()}
-              className='back-to-list-btn'>
+              data-cy='back-to-list-btn'>
               Back to List of devices
             </Button>
           </Container>

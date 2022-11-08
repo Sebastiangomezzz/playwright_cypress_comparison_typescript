@@ -46,7 +46,7 @@ export const Actions = ({ toggleShowToast, id, colors, memoryOptions }) => {
         <Button
           type='submit'
           onClick={toggleShowToast}
-          className='button-add-to-cart'>
+          cy-data='button-add-to-cart'>
           Add to cart
         </Button>
       </Form>

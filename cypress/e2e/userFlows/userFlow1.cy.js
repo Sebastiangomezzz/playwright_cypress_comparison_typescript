@@ -7,77 +7,118 @@ describe('userFlow1', () => {
 
   it('can load the page and it contains a list of 100 phones', () => {
     cy.contains('OldMobiles.com');
-    cy.get('.phones-list').children().should('have.length', 100);
+    cy.get('[data-cy="phones-list"]').children().should('have.length', 100);
   });
 
   it('can search for a phone and it returns the correct result', () => {
-    cy.get('.search-bar').type('iconia tab 7');
-    cy.get('.phones-list').children().should('have.length', 2);
-    cy.get('.search-bar').clear();
-    cy.get('.search-bar').type('iconia tab');
-    cy.get('.phones-list').children().should('have.length', 23);
-    cy.get('.search-bar').clear();
-    cy.get('.search-bar').type('motoroña');
+    cy.get('[data-cy="search-bar"]').type('iconia tab 7');
+    cy.get('[data-cy="phones-list"]').children().should('have.length', 2);
+    cy.get('[data-cy="search-bar"]').clear();
+    cy.get('[data-cy="search-bar"]').type('iconia tab');
+    cy.get('[data-cy="phones-list"]').children().should('have.length', 23);
+    cy.get('[data-cy="search-bar"]').clear();
+    cy.get('[data-cy="search-bar"]').type('motorola');
     cy.contains('No results...');
   });
 
   it('can click on a phone and it redirects to the correct page', () => {
-    cy.get('.phones-list').contains('Iconia Talk S').click();
+    cy.get('[data-cy="phones-list"]').contains('Iconia Talk S').click();
     cy.url().should('include', '/products/ZmGrkLRPXOTpxsU4jjAcv');
   });
 
   it('can click on the logo and it redirects to the home page', () => {
-    cy.get('.phones-list').contains('Iconia Talk S').click();
+    cy.get('[data-cy="phones-list"]').contains('Iconia Talk S').click();
     cy.url().should('include', '/products/ZmGrkLRPXOTpxsU4jjAcv');
-    cy.get('.navbar-brand').click();
+    cy.get('[cy-data="navbar"]').click();
     cy.url().should('eq', 'http://localhost:3000/products');
   });
 
   it('can click on the back button and it redirects to the home page', () => {
-    cy.get('.phones-list').contains('Iconia Talk S').click();
+    cy.get('[data-cy="phones-list"]').contains('Iconia Talk S').click();
     cy.url().should('include', '/products/ZmGrkLRPXOTpxsU4jjAcv');
-    cy.get('.back-to-list-btn').click();
+    cy.get('[data-cy="back-to-list-btn"]').click();
     cy.url().should('eq', 'http://localhost:3000/products/');
   });
   it('can add elements to the cart', () => {
-    cy.get('.phones-list').contains('Iconia Talk S').click();
-    cy.get('.button-add-to-cart').click();
-    cy.get('.cart-btn').click();
-    cy.get('.cart-list').children().should('have.length', 1);
-    cy.get('.button-add-to-cart').click();
+    cy.get('[data-cy="phones-list"]').contains('Iconia Talk S').click();
+    cy.get('[cy-data="button-add-to-cart"]').click();
+    cy.get('[cy-data="cart-btn"]').click();
+    cy.get('[data-cy="cart-list"]').children().should('have.length', 2);
+    cy.get('[cy-data="button-add-to-cart"]').click();
     cy.contains('Quantity:2');
 
-    cy.get('.cart-btn').click();
-    cy.get('.back-to-list-btn').click();
-    cy.get('.phones-list').contains('Liquid Z6 Plus').click();
-    cy.get('.button-add-to-cart').click();
-    cy.get('.cart-btn').click();
-    cy.get('.cart-list').children().should('have.length', 2);
-    cy.get('.button-add-to-cart').click();
+    cy.get('[cy-data="cart-btn"]').click();
+    cy.get('[data-cy="back-to-list-btn"]').click();
+    cy.get('[data-cy="phones-list"]').contains('Liquid Z6 Plus').click();
+    cy.get('[cy-data="button-add-to-cart"]').click();
+    cy.get('[cy-data="cart-btn"]').click();
+    cy.get('[data-cy="cart-list"]').children().should('have.length', 3);
+    cy.get('[cy-data="button-add-to-cart"]').click();
     cy.contains('Quantity:2');
-    cy.get('.cart-btn').click();
+    cy.get('[cy-data="cart-btn"]').click();
   });
 
   it('can add and substract from the quantity of a product', () => {
-    cy.get('.phones-list').contains('Iconia Talk S').click();
-    cy.get('.button-add-to-cart').click();
-    cy.get('.cart-btn').click();
-    cy.get('.cart-list').children().should('have.length', 1);
-    cy.get('.btn-add-one').click();
+    cy.get('[data-cy="phones-list"]').contains('Iconia Talk S').click();
+    cy.get('[cy-data="button-add-to-cart"]').click();
+    cy.get('[cy-data="cart-btn"]').click();
+    cy.get('[data-cy="cart-list"]').children().should('have.length', 2);
+    cy.get('[cy-data="btn-add-one"]').then(($btn) => {
+      $btn.click();
+    });
     cy.contains('Quantity:2');
-    cy.get('.btn-add-one').click();
+    cy.get('[cy-data="btn-add-one"]').then(($btn) => {
+      $btn.click();
+    });
     cy.contains('Quantity:3');
-    cy.get('.btn-substract-one').click();
+    cy.get('[data-cy="btn-substract-one"]').click();
     cy.contains('Quantity:2');
   });
 
   it('can remove an element from the cart', () => {
-    cy.get('.phones-list').contains('Iconia Talk S').click();
-    cy.get('.button-add-to-cart').click();
-    cy.get('.cart-btn').click();
-    cy.get('.cart-list').children().should('have.length', 1);
-    cy.get('.btn-remove-from-cart').click();
+    cy.get('[data-cy="phones-list"]').contains('Iconia Talk S').click();
+    cy.get('[cy-data="button-add-to-cart"]').click();
+    cy.get('[cy-data="cart-btn"]').click();
+    cy.get('[data-cy="cart-list"]').children().should('have.length', 2);
+    cy.get('[cy-data="btn-remove-from-cart"]').then(($btn) => {
+      $btn.click();
+    });
     cy.contains('Cart is empty');
-    cy.get('.cart-btn').click();
+    cy.get('[cy-data="cart-btn"]').click();
+  });
+
+  it('can fill the checkout form and click on the submit button', () => {
+    //hacer objecto con los datos de la compra y pasarlo
+    const userData = {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'hgfjsdhf@sdfsdfs.com',
+      phone: '123456789',
+      address: 'Calle falsa 123',
+      zipCode: '12345',
+      billingAddress: 'Calle falsa 12354654',
+      cardNumber: '1234567890123456'
+    };
+    cy.finishPurchase(userData);
+    cy.contains('Thank you for your purchase!');
+  });
+
+  const errorMsg = 'There was an error!! Check the URL or try again in a few minutes, please.';
+
+  it('can react to a 404 error code', () => {
+    cy.intercept('GET', 'https://front-test-api.herokuapp.com/api/product', {
+      statusCode: 404,
+      Response: 'error'
+    }).as('getProducts');
+    cy.wait('@getProducts');
+    cy.contains(errorMsg);
+  });
+
+  it('can show the error page when the user tries to access a page that does not exists', () => {
+    cy.visit('http://localhost:3000/products/1234567sdfasdfasdfqwenfgsdfzdfgxdf89');
+    cy.contains(errorMsg);
+    cy.visit('http://localhost:3000/pr');
+    cy.contains(errorMsg);
+    cy.visit('http://localhost:3000/products/');
   });
 });

@@ -5,7 +5,7 @@ import { Column } from './Column';
 export const List = ({ phonesData, breakPoint }) => {
   return (
     <Container className='d-flex justify-content'>
-      <Row className='phones-list'>
+      <Row data-cy='phones-list'>
         {phonesData.map((phone) => {
           return (
             <Column

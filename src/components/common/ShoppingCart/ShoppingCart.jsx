@@ -4,15 +4,17 @@ import Badge from 'react-bootstrap/Badge';
 import Overlay from 'react-bootstrap/Overlay';
 import { useSelector } from 'react-redux';
 import Popover from 'react-bootstrap/Popover';
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { ShoppingCartOverlayItem } from './ShoppingCartOverlayItem';
 import { useDispatch } from 'react-redux';
 import { deleteProductFromCart } from '../../../store/Slices/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 export const ShoppingCart = () => {
   const itemsInCart = useSelector((storeState) => storeState.cart.value);
   const productsInCart = useSelector((storeState) => storeState.cart.productsInCart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
@@ -30,8 +32,9 @@ export const ShoppingCart = () => {
   return (
     <div ref={ref}>
       <Container
-        className='d-flex align-items-end flex-column cart-btn'
-        onClick={handleClick}>
+        className='d-flex align-items-end flex-column '
+        onClick={handleClick}
+        cy-data='cart-btn'>
         <Badge
           pill
           bg='secondary'
@@ -59,7 +62,7 @@ export const ShoppingCart = () => {
           id='popover-contained'
           style={{ padding: 0, backgroundColor: 'rgba(185, 182, 182, 0.5)' }}>
           <Popover.Header as='h3'>Cart</Popover.Header>
-          <Popover.Body className='cart-list'>
+          <Popover.Body data-cy='cart-list'>
             {productsInCart && productsInCart.length > 0 ? (
               productsInCart.map((product) => (
                 <ShoppingCartOverlayItem
@@ -71,6 +74,9 @@ export const ShoppingCart = () => {
               ))
             ) : (
               <div>Cart is empty...</div>
+            )}
+            {productsInCart && productsInCart.length > 0 && (
+              <Button onClick={() => navigate('/checkout')}>Proceed to checkout</Button>
             )}
           </Popover.Body>
         </Popover>

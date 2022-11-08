@@ -1,19 +1,21 @@
 import { useState } from 'react';
-import { Loading, List, Error, SearchBar } from '../components';
+import { Loading, List, SearchBar } from '../components';
 import { useWindowResize } from '../hooks';
 import Container from 'react-bootstrap/Container';
 import { useGetProductsQuery } from '../store/api/productsApi';
+import { useNavigate } from 'react-router-dom';
 
 export const ProductListPage = () => {
   const { breakPoint } = useWindowResize();
   const { data: products, isLoading, isError, isSuccess } = useGetProductsQuery();
   const [filteredData, setFilteredData] = useState([]);
+  const navigate = useNavigate();
   return (
     <>
       {isLoading ? (
         <Loading />
       ) : isError ? (
-        <Error />
+        navigate('/error')
       ) : isSuccess ? (
         <Container>
           <SearchBar
